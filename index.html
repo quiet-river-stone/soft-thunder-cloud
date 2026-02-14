@@ -5,74 +5,61 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Modular Hearts Layout</title>
 
-<style>
-  * { box-sizing: border-box; }
-
-  body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-    background: #0d0d12;
-    overflow: hidden;
-    color: white;
-  }
-
-  canvas {
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-  }
-
-  .container {
-    position: relative;
-    z-index: 1;
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 40px;
-    padding: 40px;
-    flex-wrap: wrap;
-  }
-
-  .box {
-    width: 280px;
-    min-height: 220px;
-    padding: 24px;
-    border-radius: 16px;
-    background: rgba(255, 255, 255, 0.06);
-    backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: transform 0.3s ease;
-  }
-
-  .box:hover {
-    transform: translateY(-6px);
-  }
-
-  .box img {
-    width: 100%;
-    border-radius: 12px;
-    margin-bottom: 12px;
-  }
-
-  .box h2 {
-    margin-top: 0;
-    font-weight: 500;
-  }
-
-  .box p {
-    opacity: 0.8;
-    font-size: 14px;
-    line-height: 1.6;
-  }
-</style>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+<!-- Password gate overlay -->
+<div id="pw-overlay" role="dialog" aria-modal="true">
+  <div id="pw-box">
+    <h3>Enter password to view</h3>
+    <div>Type the access password to continue.</div>
+    <input id="pw-input" type="password" placeholder="Password" aria-label="Password" />
+    <button id="pw-submit">Unlock</button>
+    <div id="pw-error" aria-live="polite"></div>
+  </div>
+</div>
 
 <canvas id="canvas"></canvas>
 <div class="container" id="content"></div>
 
+<script type="module" src="main.js"></script>
+
 <script>
+  (function(){
+    const PASSWORD = 'valentine'; // inline fallback so file:// testing works
+    const overlay = document.getElementById('pw-overlay');
+    const input = document.getElementById('pw-input');
+    const submit = document.getElementById('pw-submit');
+    const errorEl = document.getElementById('pw-error');
+
+    function unlock(){
+      try{ overlay && overlay.parentNode.removeChild(overlay); }catch(e){}
+      try{ sessionStorage.setItem('page_unlocked','1'); }catch(e){}
+    }
+
+    function fail(msg){ if(errorEl) errorEl.textContent = msg || 'Incorrect password'; }
+
+    if(submit && input){
+      submit.addEventListener('click', ()=>{
+        const v = (input.value||'').trim();
+        if(v === PASSWORD) unlock(); else fail();
+      });
+
+      input.addEventListener('keydown', (e)=>{ if(e.key === 'Enter') submit.click(); });
+    }
+
+    if(sessionStorage.getItem && sessionStorage.getItem('page_unlocked') === '1'){
+      unlock();
+      // continue
+    }
+
+    try{
+      const qp = new URLSearchParams(location.search).get('pw');
+      if(qp){ if(qp === PASSWORD) unlock(); else fail('Invalid URL password'); }
+    }catch(e){}
+  })();
+
 /* ===============================
    CONFIGURE YOUR CONTENT HERE
 ================================ */

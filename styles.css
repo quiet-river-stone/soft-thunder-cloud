@@ -1,0 +1,112 @@
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #0d0d12;
+  overflow: hidden;
+  color: white;
+}
+
+canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 40px;
+  flex-wrap: wrap;
+}
+
+.box {
+  width: 280px;
+  min-height: 220px;
+  padding: 24px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.box:hover {
+  transform: translateY(-6px);
+}
+
+.box img {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.box h2 {
+  margin-top: 0;
+  font-weight: 500;
+}
+
+.box p {
+  opacity: 0.8;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Password overlay */
+#pw-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8,8,10,0.95);
+  z-index: 9999;
+  color: #fff;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  padding: 20px;
+}
+
+#pw-box {
+  width: 100%;
+  max-width: 420px;
+  background: rgba(255,255,255,0.02);
+  border-radius: 12px;
+  padding: 22px;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+
+#pw-box h3 {
+  margin: 0 0 8px 0;
+  font-weight: 600;
+}
+
+#pw-input {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.02);
+  color: inherit;
+  outline: none;
+}
+
+#pw-submit {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  background: #ff5a87;
+  color: white;
+  cursor: pointer;
+}
+
+#pw-error { color: #ffb3c6; margin-top: 8px; font-size: 13px; }
