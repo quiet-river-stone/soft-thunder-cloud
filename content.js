@@ -1,42 +1,74 @@
+// EDIT THIS MESSAGE: change the text below to update the single box message
+const MESSAGE = `Dear Lumi,
+
+Wishing you a day full of soft clouds and warm smiles.
+
+Love, Me`;
+
 function renderBoxes(data) {
   const container = document.getElementById('content');
   if (!container) return;
   container.innerHTML = '';
 
-  data.forEach(item => {
-    const box = document.createElement('div');
-    box.className = 'box';
+  // Create a single box only
+  const box = document.createElement('div');
+  box.className = 'box';
+  const text = document.createElement('p');
+  text.textContent = data.message;
+  box.appendChild(text);
+  container.appendChild(box);
+}
 
-    if (item.image) {
-      const img = document.createElement('img');
-      img.src = item.image;
-      box.appendChild(img);
-    }
+function createEnvelope(container) {
+  const wrap = document.createElement('div');
+  wrap.className = 'envelope-wrap';
 
-    if (item.title) {
-      const title = document.createElement('h2');
-      title.textContent = item.title;
-      box.appendChild(title);
-    }
+  const env = document.createElement('div');
+  env.className = 'envelope';
+  env.setAttribute('role','button');
+  env.setAttribute('aria-label','Open letter');
 
-    if (item.text) {
-      const text = document.createElement('p');
-      text.textContent = item.text;
-      box.appendChild(text);
-    }
+  const flap = document.createElement('div');
+  flap.className = 'flap';
+  env.appendChild(flap);
 
-    container.appendChild(box);
-  });
+  wrap.appendChild(env);
+  document.body.appendChild(wrap);
+
+  return { wrap, env };
+}
+
+function showTitle(text) {
+  const existing = document.querySelector('.page-title');
+  if (existing) return;
+  const title = document.createElement('div');
+  title.className = 'page-title';
+  title.textContent = text;
+  const container = document.getElementById('content');
+  if (container) container.parentNode.insertBefore(title, container);
 }
 
 function initContent() {
-  const contentData = [
-    { title: 'First Box', text: "Edit this text directly in the contentData array. Add as many boxes as you want." },
-    { title: 'Second Box', text: "You can swap this text for an image by using the 'image' property instead." },
-    { title: 'Third Box', text: 'The layout auto-renders based on this configuration.' }
-  ];
+  const contentData = { message: MESSAGE };
 
+  const container = document.getElementById('content');
+  if (!container) return;
+
+  // render content but keep it hidden until envelope is opened
   renderBoxes(contentData);
+  container.classList.add('hidden');
+
+  const { wrap, env } = createEnvelope(container);
+
+  env.addEventListener('click', () => {
+    // animate open
+    env.classList.add('open');
+    setTimeout(() => {
+      wrap.remove();
+      container.classList.remove('hidden');
+      showTitle('Happy Valentines day Lumi');
+    }, 420);
+  }, { once: true });
 }
 
 // Only initialize after the page is unlocked (or if already unlocked)

@@ -23,6 +23,7 @@ function unlockOverlay(overlay) {
 function fail(elt, msg) { if (elt) elt.textContent = msg || 'Incorrect password'; }
 
 function initPasswordGate() {
+  console.log('pw.js:initPasswordGate');
   const overlay = document.getElementById('pw-overlay');
   const input = document.getElementById('pw-input');
   const submit = document.getElementById('pw-submit');
@@ -39,7 +40,8 @@ function initPasswordGate() {
 
   submit.addEventListener('click', () => {
     const v = (input.value || '').trim();
-    if (v === PASSWORD) unlockOverlay(overlay); else fail(errorEl);
+    console.log('pw.js:submit clicked', v ? 'value entered' : 'empty');
+    if (v === PASSWORD) { console.log('pw.js:password matched'); unlockOverlay(overlay); } else { console.log('pw.js:password failed'); fail(errorEl); }
   });
 
   input.addEventListener('keydown', (e) => { if (e.key === 'Enter') submit.click(); });
