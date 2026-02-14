@@ -1,5 +1,14 @@
 const PASSWORD = 'valentine'; // change as needed
 
+// Prepare background audio (will be played when unlocked)
+const _bgAudio = new Audio('instrumental.mp3');
+_bgAudio.preload = 'auto';
+_bgAudio.volume = 0.1; // set playback volume to 10%
+// Attempt to play when any part of the app emits the unlock event
+window.addEventListener('pageUnlocked', () => {
+  _bgAudio.play().catch(() => {/* playback may be blocked until user gesture */});
+});
+
 function dispatchUnlocked() {
   window.dispatchEvent(new CustomEvent('pageUnlocked'));
 }

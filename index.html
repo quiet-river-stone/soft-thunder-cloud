@@ -36,6 +36,7 @@
     function unlock(){
       try{ overlay && overlay.parentNode.removeChild(overlay); }catch(e){}
       try{ sessionStorage.setItem('page_unlocked','1'); }catch(e){}
+      try{ window.dispatchEvent(new CustomEvent('pageUnlocked')); }catch(e){}
     }
 
     function fail(msg){ if(errorEl) errorEl.textContent = msg || 'Incorrect password'; }
