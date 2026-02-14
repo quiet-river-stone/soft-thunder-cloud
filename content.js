@@ -70,7 +70,7 @@ function initContent() {
     setTimeout(() => {
       wrap.remove();
       container.classList.remove('hidden');
-      showTitle('Happy Valentines day Lumi');
+      showTitle('Happy Valentines Day Lumi');
       // add photos around the box
       try {
         const photos = ['pic1.png','pic2.png','pic3.png','pic4.png'];
