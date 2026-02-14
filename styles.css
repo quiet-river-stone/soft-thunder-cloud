@@ -3,7 +3,10 @@
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-  background: #0d0d12;
+  background-image: url('background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
   overflow: hidden;
   color: white;
 }
@@ -165,3 +168,26 @@ canvas {
 }
 
 .box p { font-size: 22px; line-height: 1.6; white-space: pre-wrap; }
+
+/* Photo styles */
+.photo {
+  position: absolute;
+  width: 320px;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6);
+  object-fit: cover;
+  transform-origin: center;
+  transition: transform 220ms ease, opacity 300ms ease;
+  opacity: 0.98;
+  z-index: 1;
+}
+
+.photo:hover { transform: scale(1.05) rotate(-1deg); }
+
+.pos-tl { top: 8%; left: 4%; transform: rotate(-6deg); }
+.pos-tr { top: 8%; right: 4%; transform: rotate(6deg); }
+.pos-bl { bottom: 8%; left: 6%; transform: rotate(4deg); }
+.pos-br { bottom: 6%; right: 6%; transform: rotate(-4deg); }
+

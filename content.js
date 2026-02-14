@@ -1,9 +1,13 @@
 // EDIT THIS MESSAGE: change the text below to update the single box message
-const MESSAGE = `Dear Lumi,
+const MESSAGE = `Happy Valentines day beb! 
 
-Wishing you a day full of soft clouds and warm smiles.
+I just wanted to say I appreciate you so, so much. I love your sense of humour, your creativity, and the way you care for those who are close with you. 
 
-Love, Me`;
+You always know how to brighten my day, and I feel so lucky to have you in my life.
+
+Even though it's only been a few months, I hope as a couple we'll help each other become the best versions of ourselves. 
+
+I love you - Anthony`;
 
 function renderBoxes(data) {
   const container = document.getElementById('content');
@@ -67,6 +71,18 @@ function initContent() {
       wrap.remove();
       container.classList.remove('hidden');
       showTitle('Happy Valentines day Lumi');
+      // add photos around the box
+      try {
+        const photos = ['pic1.png','pic2.png','pic3.png','pic4.png'];
+        const positions = ['pos-tl','pos-tr','pos-bl','pos-br'];
+        photos.forEach((src,i) => {
+          const img = document.createElement('img');
+          img.src = src;
+          img.className = 'photo ' + positions[i%positions.length];
+          img.alt = `photo ${i+1}`;
+          container.appendChild(img);
+        });
+      } catch(e) { /* ignore if images missing */ }
     }, 420);
   }, { once: true });
 }
