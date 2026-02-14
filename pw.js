@@ -1,4 +1,4 @@
-const PASSWORD = 'valentine'; // change as needed
+const PASSWORD = 'Luminous<3'; // change as needed
 
 // Prepare background audio (will be played when unlocked)
 const _bgAudio = new Audio('instrumental.mp3');

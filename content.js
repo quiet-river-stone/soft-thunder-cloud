@@ -1,11 +1,11 @@
 // EDIT THIS MESSAGE: change the text below to update the single box message
 const MESSAGE = `Happy Valentines day beb! 
 
-I just wanted to say I appreciate you so, so much. I love your sense of humour, your creativity, and the way you care for those who are close with you. 
+I just wanted to say I appreciate you so, so much. I love your sense of humour, your creativity, and how empathetic you are to other people. 
 
-You always know how to brighten my day, and I feel so lucky to have you in my life.
+You always manage to brighten my day, and I feel so lucky to have you in my life.
 
-Even though it's only been a few months, I hope as a couple we'll help each other become the best versions of ourselves. 
+Even though it's only been a few months, I hope as a couple we'll continue to help each other become the best versions of ourselves. 
 
 I love you - Anthony`;
 
